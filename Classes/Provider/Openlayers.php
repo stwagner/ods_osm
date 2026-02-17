@@ -600,7 +600,7 @@ class Openlayers extends BaseProvider
                 } else {
                     $jsMarker .= $markerStyle;
                     $jsMarker .= "var " . $jsElementVar . " = new ol.layer.Vector({
-                        title: '<img src=\"" .$icon . "\" class=\"marker-icon\" /> " . ($item['group_title'] ?? $item['name']) . "',
+                        title: '<img src=\"" .$icon . "\" class=\"marker-icon\" /> " . Openlayers::escapeEntities($item['group_title'] ?? $item['name']) . "',
                         source: new ol.source.Vector({
                             features: [
                                  new ol.Feature({
@@ -620,5 +620,20 @@ class Openlayers extends BaseProvider
             }
 
         return $jsMarker;
+    }
+    
+    /**
+     * Replaces ' and " charactes with HTML entities.
+     *
+     * @param string $text
+     *              Text to escape.
+     * @return string
+     *              Text with HTML entities for ' and " characters.
+     */
+    private static function escapeEntities(string $text) : string
+    {
+        $escaped = str_replace("'", "&apos;", $text);
+        $escaped = str_replace('"', "&quot;", $escaped);
+        return $escaped;
     }
 }

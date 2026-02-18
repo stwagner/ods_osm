@@ -540,7 +540,7 @@ class Openlayers extends BaseProvider
                         $markerOptions['icon'] = 'icon: new L.Icon(' . json_encode($icon) . ')';
                     }
                 } else {
-                    $icon = '/typo3conf/ext/ods_osm/Resources/Public/Icons/marker-icon.png';
+                    $icon = \TYPO3\CMS\Core\Utility\PathUtility::getPublicResourceWebPath('EXT:ods_osm/Resources/Public/Icons/marker-icon.png');
                     $marker['size_x'] = 25;
                     $marker['size_y'] = 41;
                 }
